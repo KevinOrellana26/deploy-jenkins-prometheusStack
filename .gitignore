@@ -1,0 +1,8 @@
+#Ignorar todos los ficheros generados por terraform al ejecutar el comando terraform init
+#------------------------------------------------------
+#       Alertmanager, Grafana, Jenkins, Prometheus
+#------------------------------------------------------
+**/.terraform/
+**/.terraform.lock.hcl
+**/terraform.tfstate
+**/terraform.tfstate.backup
