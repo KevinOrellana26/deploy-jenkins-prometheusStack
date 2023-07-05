@@ -4,7 +4,7 @@
 resource "kubernetes_ingress_v1" "alert-ingress" {
   metadata {
     name      = "alert-ingress"
-    namespace = "jks-grf-pth"
+    namespace = "jks-grf-pth-fake"
     annotations = {
       "kubernetes.io/ingress.class"                 = "nginx",
       "cert-manager.io/cluster-issuer"              = "syndeno-issuer"
@@ -14,7 +14,7 @@ resource "kubernetes_ingress_v1" "alert-ingress" {
   }
   spec {
     rule {
-      host = "alertmanager.plt.aw.syndeno.net"
+      host = "alertmanagerFake.plt.aw.syndeno.net"
       http {
         path {
           backend {
@@ -30,8 +30,8 @@ resource "kubernetes_ingress_v1" "alert-ingress" {
       }
     }
     tls {
-      hosts       = ["alertmanager.plt.aw.syndeno.net"]
-      secret_name = "alertmanager.plt.aw.syndeno.net"
+      hosts       = ["alertmanagerFake.plt.aw.syndeno.net"]
+      secret_name = "alertmanagerFake.plt.aw.syndeno.net"
     }
   }
 }
@@ -43,7 +43,7 @@ resource "kubernetes_ingress_v1" "alert-ingress" {
 resource "kubernetes_service_v1" "alert-service" {
   metadata {
     name      = "alert-service"
-    namespace = "jks-grf-pth"
+    namespace = "jks-grf-pth-fake"
   }
   spec {
     selector = {
@@ -65,7 +65,7 @@ resource "kubernetes_service_v1" "alert-service" {
 resource "kubernetes_config_map_v1" "alert-config" {
   metadata {
     name = "alert-config"
-    namespace = "jks-grf-pth"
+    namespace = "jks-grf-pth-fake"
   }
   data = {
     "alertmanager.yml" = <<EOF
@@ -141,7 +141,7 @@ resource "kubernetes_config_map_v1" "alert-config" {
 resource "kubernetes_deployment_v1" "alert-deploy" {
   metadata {
     name      = "alert-deploy"
-    namespace = "jks-grf-pth"
+    namespace = "jks-grf-pth-fake"
   }
   spec {
     replicas = 1

@@ -4,7 +4,7 @@
 resource "kubernetes_ingress_v1" "pth-ingress" {
   metadata {
     name      = "pth-ingress"
-    namespace = "jks-grf-pth"
+    namespace = "jks-grf-pth-fake"
     annotations = {
       "kubernetes.io/ingress.class"                 = "nginx",
       "cert-manager.io/cluster-issuer"              = "syndeno-issuer"
@@ -14,7 +14,7 @@ resource "kubernetes_ingress_v1" "pth-ingress" {
   }
   spec {
     rule {
-      host = "prometheus.plt.aw.syndeno.net"
+      host = "prometheusFake.plt.aw.syndeno.net"
       http {
         path {
           backend {
@@ -30,8 +30,8 @@ resource "kubernetes_ingress_v1" "pth-ingress" {
       }
     }
     tls {
-      hosts       = ["prometheus.plt.aw.syndeno.net"]
-      secret_name = "prometheus.plt.aw.syndeno.net"
+      hosts       = ["prometheusFake.plt.aw.syndeno.net"]
+      secret_name = "prometheusFake.plt.aw.syndeno.net"
     }
   }
 }
@@ -43,7 +43,7 @@ resource "kubernetes_ingress_v1" "pth-ingress" {
 resource "kubernetes_service_v1" "pth-service" {
   metadata {
     name      = "pth-service"
-    namespace = "jks-grf-pth"
+    namespace = "jks-grf-pth-fake"
   }
   spec {
     selector = {
@@ -63,7 +63,7 @@ resource "kubernetes_service_v1" "pth-service" {
 resource "kubernetes_config_map_v1" "prometheus-config" {
   metadata {
     name = "prometheus-config"
-    namespace = "jks-grf-pth"
+    namespace = "jks-grf-pth-fake"
   }
   data = {
     "prometheus.yml" = <<EOF
@@ -78,7 +78,7 @@ resource "kubernetes_config_map_v1" "prometheus-config" {
     alertmanagers:
     - static_configs:
         - targets:
-            - "alert-service.jks-grf-pth.svc.cluster.local:9093"
+            - "alert-service.jks-grf-pth-fake.svc.cluster.local:9093"
 
   scrape_configs:
     - job_name: dc_prometheus
@@ -105,10 +105,10 @@ resource "kubernetes_config_map_v1" "prometheus-config" {
     - job_name: 'jenkins'
       metrics_path: '/prometheus/'
       static_configs:
-        - targets: ['jks.plt.aw.syndeno.net']
+        - targets: ['jksFake.plt.aw.syndeno.net']
     - job_name: 'alertmanager'
       static_configs:
-        - targets: ['alertmanager.plt.aw.syndeno.net']
+        - targets: ['alertmanagerFake.plt.aw.syndeno.net']
     EOF
   }
 }
@@ -116,7 +116,7 @@ resource "kubernetes_config_map_v1" "prometheus-config" {
 resource "kubernetes_deployment_v1" "name" {
   metadata {
     name = "prometheus-deploy"
-    namespace = "jks-grf-pth"
+    namespace = "jks-grf-pth-fake"
   }
   spec {
     replicas = 1

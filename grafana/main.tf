@@ -4,7 +4,7 @@
 resource "kubernetes_ingress_v1" "grafana-ingress" {
   metadata {
     name      = "grafana-ingress"
-    namespace = "jks-grf-pth"
+    namespace = "jks-grf-pth-fake"
     annotations = {
       "kubernetes.io/ingress.class"                 = "nginx",
       "cert-manager.io/cluster-issuer"              = "syndeno-issuer"
@@ -14,7 +14,7 @@ resource "kubernetes_ingress_v1" "grafana-ingress" {
   }
   spec {
     rule {
-      host = "gf.plt.aw.syndeno.net"
+      host = "gfFake.plt.aw.syndeno.net"
       http {
         path {
           backend {
@@ -30,8 +30,8 @@ resource "kubernetes_ingress_v1" "grafana-ingress" {
       }
     }
     tls {
-      hosts       = ["gf.plt.aw.syndeno.net"]
-      secret_name = "gf.plt.aw.syndeno.net"
+      hosts       = ["gfFake.plt.aw.syndeno.net"]
+      secret_name = "gfFake.plt.aw.syndeno.net"
     }
   }
 }
@@ -43,7 +43,7 @@ resource "kubernetes_ingress_v1" "grafana-ingress" {
 resource "kubernetes_service_v1" "grafana-service" {
   metadata {
     name      = "grafana-service"
-    namespace = "jks-grf-pth"
+    namespace = "jks-grf-pth-fake"
   }
   spec {
     selector = {
@@ -67,7 +67,7 @@ resource "kubernetes_service_v1" "grafana-service" {
 resource "kubernetes_deployment_v1" "grafana-deploy" {
   metadata {
     name      = "grafana-deploy"
-    namespace = "jks-grf-pth"
+    namespace = "jks-grf-pth-fake"
   }
   spec {
     replicas = 1

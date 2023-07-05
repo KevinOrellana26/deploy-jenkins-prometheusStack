@@ -4,7 +4,7 @@
 resource "kubernetes_ingress_v1" "jks-ingress" {
   metadata {
     name      = "jks-ingress"
-    namespace = "jks-grf-pth"
+    namespace = "jks-grf-pth-fake"
     annotations = {
       "kubernetes.io/ingress.class"                 = "nginx",
       "cert-manager.io/cluster-issuer"              = "syndeno-issuer"
@@ -14,7 +14,7 @@ resource "kubernetes_ingress_v1" "jks-ingress" {
   }
   spec {
     rule {
-      host = "jks.plt.aw.syndeno.net"
+      host = "jksFake.plt.aw.syndeno.net"
       http {
         path {
           backend {
@@ -30,8 +30,8 @@ resource "kubernetes_ingress_v1" "jks-ingress" {
       }
     }
     tls {
-      hosts       = ["jks.plt.aw.syndeno.net"]
-      secret_name = "jks.plt.aw.syndeno.net"
+      hosts       = ["jksFake.plt.aw.syndeno.net"]
+      secret_name = "jksFake.plt.aw.syndeno.net"
     }
   }
 }
@@ -66,7 +66,7 @@ resource "kubernetes_service_v1" "jks-service" {
 resource "kubernetes_deployment_v1" "jks-deploy" {
   metadata {
     name      = "jks-deploy"
-    namespace = "jks-grf-pth"
+    namespace = "jks-grf-pth-fake"
   }
   spec {
     replicas = 1
