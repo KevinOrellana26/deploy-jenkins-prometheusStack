@@ -1,11 +1,11 @@
 pipeline {
     agent any
     stages {
-        stage('Check Repository') { //verificamos que los ficheros esten en el repositorio
-            steps {
-                git 'https://github.com/KevinOrellana26/deploy-jenkins-prometheusStack.git'
-            }
-        }
+        // stage('Check Repository') { //verificamos que los ficheros esten en el repositorio
+        //     steps {
+        //         git 'https://github.com/KevinOrellana26/deploy-jenkins-prometheusStack.git'
+        //     }
+        // }
         stage('Create namespace') { //creamos el namespace
             steps {
                 sh './namespace.sh'
