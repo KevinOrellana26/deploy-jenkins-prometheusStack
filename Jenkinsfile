@@ -8,9 +8,7 @@ pipeline {
         }
         stage('Create namespace') { //creamos el namespace
             steps {
-                sh "terraform init"
-                sh "terraform plan"
-                sh "terraform apply -auto-approve"
+                sh './namespace.sh'
             }
         }
 
