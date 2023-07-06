@@ -51,9 +51,15 @@ resource "kubernetes_service_v1" "jks-service" {
     }
     session_affinity = "ClientIP"
     port {
+      name = "httpport"
       port        = 8080
       target_port = 8080
       protocol    = "TCP"
+    }
+    port {
+      name = "jnlpport"
+      port = 50000
+      target_port = 50000
     }
     type = "NodePort"
   }
@@ -86,7 +92,12 @@ resource "kubernetes_deployment_v1" "jks-deploy" {
           image = "jenkins/jenkins:latest"
           name  = "jenkins"
           port {
+            name = "httpport"
             container_port = 8080
+          }
+          port {
+            name = "jnlpport"
+            container_port = 50000
           }
           volume_mount {
             name       = "jenkins-home"
