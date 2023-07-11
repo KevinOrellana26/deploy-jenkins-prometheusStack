@@ -12,12 +12,15 @@ pipeline {
             steps {
                 script{
                     sh """
-                        sudo apt-get update && sudo apt-get install -y gnupg software-properties-common
-                        wget -O- https://apt.releases.hashicorp.com/gpg | gpg --dearmor | sudo tee /usr/share/keyrings/hashicorp-archive-keyring.gpg
-                        echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg]
-                        sudo tee /etc/apt/sources.list.d/hashicorp.list
-                        sudo apt update
-                        sudo apt-get install terraform
+                        apt-get update && apt-get install -y gnupg software-properties-common && \
+                        wget -O- https://apt.releases.hashicorp.com/gpg | \
+                        gpg --dearmor | \
+                        tee /usr/share/keyrings/hashicorp-archive-keyring.gpg && \
+                        echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] \
+                        https://apt.releases.hashicorp.com $(lsb_release -cs) main" | \
+                        tee /etc/apt/sources.list.d/hashicorp.list && \
+                        apt update && \
+                        apt-get install terraform && \
                         terraform --version
                     sh """
                 }
