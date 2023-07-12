@@ -12,9 +12,9 @@ pipeline {
             steps{
                 script {
                     sh '''
-                        apt install -y sudo && \
-                        apt install -y curl && \
-                        apt install -y wget && \
+                        apt update &&
+                        sudo --version
+                        curl --version
                         wget --version
                     sh '''
                 }
