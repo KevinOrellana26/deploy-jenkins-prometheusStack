@@ -8,26 +8,28 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/KevinOrellana26/deploy-jenkins-prometheusStack.git'
             }
         }
-        stage('Install software') {
-            steps{
-                script {
-                    sh '''
-                        apt update &&
-                        sudo --version
-                        curl --version
-                        wget --version
-                    sh '''
-                }
-            }
-        }
+        // stage('Install software') {
+        //     steps{
+        //         script {
+        //             sh '''
+        //                 apt update &&
+        //                 sudo --version
+        //                 curl --version
+        //                 wget --version
+        //             sh '''
+        //         }
+        //     }
+        // }
         stage('Install Terraform') {
             steps {
                 script {
                     sh '''
-                        wget -O- https://apt.releases.hashicorp.com/gpg | gpg --dearmor | tee /usr/share/keyrings/hashicorp-archive-keyring.gpg
+                        sudo apt-get update && sudo apt-get install -y gnupg software-properties-common
+                        wget -O- https://apt.releases.hashicorp.com/gpg | gpg --dearmor | sudo tee /usr/share/keyrings/hashicorp-archive-keyring.gpg
+                        gpg --no-default-keyring --keyring /usr/share/keyrings/hashicorp-archive-keyring.gpg --fingerprint
                         echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
-                        apt update
-                        apt install -y terraform
+                        sudo apt update
+                        sudo apt-get install -y terraform
                         terraform --version
                     sh '''
                 }
