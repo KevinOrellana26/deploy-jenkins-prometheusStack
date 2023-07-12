@@ -8,11 +8,6 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/KevinOrellana26/deploy-jenkins-prometheusStack.git'
             }
         }
-        stage('test'){
-            steps {
-                sh 'ls -lha'
-            }
-        }
         stage('Create namespace') { //creamos el namespace
             steps {
                 //sh './namespace.sh'
