@@ -10,8 +10,8 @@ pipeline {
         }
         stage('Install Terraform') {
             steps {
-                script{
-                    sh """
+                script {
+                    sh '''
                         apt-get update && apt-get install -y gnupg software-properties-common && \
                         wget -O- https://apt.releases.hashicorp.com/gpg | \
                         gpg --dearmor | \
@@ -22,7 +22,7 @@ pipeline {
                         apt update && \
                         apt-get install terraform && \
                         terraform --version
-                    sh """
+                    sh '''
                 }
                 // sh 'sudo apt-get update && sudo apt-get install -y gnupg software-properties-common'
                 // sh 'wget -O- https://apt.releases.hashicorp.com/gpg | gpg --dearmor | sudo tee /usr/share/keyrings/hashicorp-archive-keyring.gpg'
