@@ -1,0 +1,20 @@
+// pipeline {
+//     agent any
+
+//     stages {
+//         stage('docker build') {
+//             steps {
+//                 script {
+//                     sh "docker build -f aplicaciones_comunes/php/Dockerfile -t kevinorellana/common-applications:php-${BUILD_ID} aplicaciones_comunes"
+//                 }
+//             }
+//         }
+//         stage('docker push') {
+//             steps {
+//                 script {
+//                     sh "docker push kevinorellana/common-applications:php-${BUILD_ID}"
+//                 }
+//             }
+//         }
+//     }
+// }

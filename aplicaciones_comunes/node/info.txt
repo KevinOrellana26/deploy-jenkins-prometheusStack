@@ -1,0 +1,13 @@
+Antes de crear un "¡Hola Mundo!" usando Node.js. Una aplicación en Node.js consta de los siguientes tres componentes:
+
+* Importar módulos requeridos:
+    se usa la directiva "require" para cargar módulos de Node.js
+* Crear servidor:
+    un servidor que escuchará las solicitudes del cliente de forma similar al servidor Apache HTTP
+* Leer solicitud y devolver respuesta:
+    el servidor creado en un paso anterior leerá la solicitud HTTP realizada por el cliente, que puede ser un navegador o una consola, y devolverá la respuesta. 
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Install nodejs and npm
+* sudo apt update
+* sudo apt install nodejs && npm

@@ -1,0 +1,4 @@
+- ng new hello-world
+- cd hello-world
+- ng serve
+- edit the file /hello-world/src/app/app.component.html
